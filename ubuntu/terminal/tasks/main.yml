@@ -3,11 +3,6 @@
   tags:
     - always
 
-- name: Print all available facts
-  ansible.builtin.debug:
-    var: ansible_facts
-  tags: debug
-
 - name: Install generic apps
   include: apps.yml
   tags:
@@ -22,3 +17,8 @@
   include: zsh.yml
   tags:
     - zsh
+
+- name: Setup git 
+  include: git.yml
+  tags:
+    - git

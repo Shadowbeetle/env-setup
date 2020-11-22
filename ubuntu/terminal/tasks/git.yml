@@ -1,0 +1,30 @@
+- name: Install git
+  become: yes
+  apt:
+    name:
+      - git
+    state: present
+
+- name: Ensure dotfiles are up to date
+  include: dotfiles.yml
+
+- name: Back up existing ~/.gitconfig
+  shell: if [ -f ~/.gitconfig ]; then mv ~/.gitconfig ~/.gitconfig.bak ; fi
+
+- name: Link .gitconfig
+  file:
+    state: link
+    src: "{{ dotfiles_path }}/git/dot-gitconfig"
+    dest: ~/.gitconfig
+
+- name: Back up existing ~/.gitignore-global
+  shell: if [ -f ~/.gitignore-global ]; then mv ~/.gitignore-global ~/.gitignore-global.bak ; fi
+
+- name: Link .gitignore-global
+  file:
+    state: link
+    src: "{{ dotfiles_path }}/git/dot-gitignore-global"
+    dest: ~/.gitignore-global
+
+- name: Setup global gitignore
+  shell: git config --global core.excludesfile ~/.gitignore-global
