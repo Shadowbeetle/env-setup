@@ -3,7 +3,7 @@
   apt:
     name:
       - autojump
-      - python-pygments # pygmentize
+      - python3-pygments # pygmentize
 
 - name: Clone fzf
   git:
