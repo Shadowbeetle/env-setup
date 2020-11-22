@@ -28,7 +28,6 @@
   tags:
     - tmux
 
-
 - name: Setup ranger
   include: ranger.yml
   tags:
