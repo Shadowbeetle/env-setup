@@ -1,0 +1,21 @@
+- name: Install ranger
+  become: yes
+  apt:
+    name:
+      - ranger
+    state: present
+
+- name: Ensure dotfiles are up to date
+  include: dotfiles.yml
+
+- name: Ensure directories exist
+  include: directories.yml
+
+- name: Back up existing ranger config
+  shell: if [ -d ~/.config/ranger ]; then mv ~/.config/ranger ~/.config/ranger.bak ; fi
+
+- name: Link ranger config
+  file:
+    state: link
+    src: "{{ dotfiles_path }}/dot-config/ranger"
+    dest: ~/.config/ranger
