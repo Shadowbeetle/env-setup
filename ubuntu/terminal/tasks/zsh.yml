@@ -21,8 +21,7 @@
     dest: ~/.zshrc
 
 - name: Install zplug
-  shell: curl -sL --proto-redir -all,https https://raw.githubusercontent.com/zplug/installer/master/installer.zsh | zsh
-  ignore_errors: yes
+  shell: test -d ~/.zplug || curl -sL --proto-redir -all,https https://raw.githubusercontent.com/zplug/installer/master/installer.zsh | zsh
 
 - name: Get zsh path
   command: which zsh 
