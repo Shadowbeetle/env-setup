@@ -22,3 +22,8 @@
   include: git.yml
   tags:
     - git
+
+- name: Setup tmux
+  include: tmux.yml
+  tags:
+    - tmux
