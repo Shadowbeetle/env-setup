@@ -1,0 +1,21 @@
+- name: Install vim-gtk
+  become: yes
+  apt:
+    name:
+      - vim-gtk
+    state: present
+
+- name: Ensure dotfiles are up to date
+  include: dotfiles.yml
+
+- name: Back up existing ~/.vimrc
+  shell: if [ -f ~/.vimrc ]; then mv ~/.vimrc ~/.vimrc.bak; fi
+
+- name: Setup .vimrc
+  file:
+    state: link
+    src: "{{ dotfiles_path }}/vim/dot-vimrc"
+    dest: ~/.vimrc
+
+- name: Install vim-plug
+  shell: curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim

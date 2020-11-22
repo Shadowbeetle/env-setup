@@ -1,0 +1,7 @@
+- name: Create Projects directory
+  file:
+    state: directory
+    dest: "{{ item }}"
+  loop:
+    - ~/Projects
+    - ~/.config

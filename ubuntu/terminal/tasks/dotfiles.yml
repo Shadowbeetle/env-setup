@@ -1,0 +1,6 @@
+- name: Checkout dotfiles
+  git:
+    dest: "{{ dotfiles_path }}"
+    repo: git@github.com:Shadowbeetle/dotfiles.git
+    key_file: "{{ ssh_key_path }}"
+    accept_hostkey: yes

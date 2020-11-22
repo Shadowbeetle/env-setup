@@ -1,0 +1,33 @@
+- name: Install zsh and dependencies
+  become: yes
+  apt:
+    name:
+      - zsh
+      - curl
+      - git
+    state: present
+
+- name: Back up existing ~/.zshrc
+  shell: if [ -f ~/.zshrc ]; then mv ~/.zshrc ~/.zshrc.bak ; fi
+
+- name: Ensure dotfiles are up to date
+  include: dotfiles.yml
+
+- name: Link .zshrc
+  file:
+    state: link
+    src: "{{ dotfiles_path }}/zsh/dot-zshrc"
+    dest: ~/.zshrc
+
+- name: Install zplug
+  shell: curl -sL --proto-redir -all,https https://raw.githubusercontent.com/zplug/installer/master/installer.zsh | zsh
+
+- name: Get zsh path
+  command: which zsh 
+  register: zsh_path
+
+- name: Switch to zsh
+  user: 
+    name: "{{ ansible_facts['user_id'] }}"
+    shell: "{{ zsh_path.stdout }}"
+  become: yes 

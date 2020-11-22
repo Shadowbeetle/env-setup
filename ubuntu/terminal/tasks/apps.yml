@@ -1,0 +1,7 @@
+- name: Install apps
+  become: yes
+  apt:
+    name:
+      - stow 
+      - mlocate # for locate and updatedb
+    state: present

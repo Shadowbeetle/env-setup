@@ -1,0 +1,7 @@
+- name: Apt Update & Upgrade
+  become: yes
+  apt:
+    update_cache: yes
+    upgrade: safe
+  tags:
+    - always
