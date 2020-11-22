@@ -6,7 +6,7 @@
 4. Add SSH key to GitHub
 5. Install git
 6. Install pip `sudo apt-get -y install python3-pip python3-dev libffi-dev libssl-dev`
-7. Install ansible `pip install ansible --user`
+7. Install ansible `pip3 install ansible --user`
 
 # Usage
 
