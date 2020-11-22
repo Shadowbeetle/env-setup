@@ -32,3 +32,8 @@
   include: ranger.yml
   tags:
     - ranger
+
+- name: Setup utilities
+  include: utils.yml
+  tags:
+    - utils
