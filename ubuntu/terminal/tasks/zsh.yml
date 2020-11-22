@@ -5,6 +5,7 @@
       - zsh
       - curl
       - git
+      - fonts-powerline
     state: present
 
 - name: Back up existing ~/.zshrc
@@ -21,6 +22,7 @@
 
 - name: Install zplug
   shell: curl -sL --proto-redir -all,https https://raw.githubusercontent.com/zplug/installer/master/installer.zsh | zsh
+  ignore_errors: yes
 
 - name: Get zsh path
   command: which zsh 
