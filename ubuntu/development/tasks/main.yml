@@ -1,0 +1,4 @@
+- name: Setup node
+  include: node.yml
+  tags:
+    - node
