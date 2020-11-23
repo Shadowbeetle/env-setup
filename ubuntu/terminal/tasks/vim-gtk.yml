@@ -8,8 +8,18 @@
 - name: Ensure dotfiles are up to date
   include: dotfiles.yml
 
+- name: Check if ~/.vimrc already exists
+  stat: 
+    path: ~/.vimrc.bak
+  register: backup_stat
+
+- name: Fail if ~/.vimrc.bak already exists
+  fail:
+    msg: ~/.vimrc.bak already exists, refusing to continue
+  when: backup_stat.stat.exists
+
 - name: Back up existing ~/.vimrc
-  shell: if [ -f ~/.vimrc ]; then mv ~/.vimrc ~/.vimrc.bak; fi
+  shell: if [ ! -L ~/.vimrc ] && [ -f ~/.vimrc ]; then mv ~/.vimrc ~/.vimrc.bak; fi
 
 - name: Setup .vimrc
   file:
