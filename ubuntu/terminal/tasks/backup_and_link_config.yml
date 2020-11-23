@@ -1,0 +1,24 @@
+- name: Check if "{{ backup_path }}" already exists
+  stat: 
+    path: "{{ backup_path }}"
+  register: backup_stat
+
+- name: Fail if "{{ backup_path }}" already exists
+  fail:
+    msg: "{{ backup_path }} already exists, refusing to continue"
+  when: backup_stat.stat.exists
+
+- name: Check if "{{ config_path }}" already exists
+  stat: 
+    path: "{{ config_path }}"
+  register: config_stat
+
+- name: Back up existing "{{ config_path }}" 
+  command: mv "{{ config_path }}" "{{ backup_path }}"
+  when: config_stat.stat.exists and not config_stat.stat.islnk
+
+- name: Setup "{{ config_path }}"
+  file:
+    state: link
+    src: "{{ link_target }}"
+    dest: "{{ config_path }}"

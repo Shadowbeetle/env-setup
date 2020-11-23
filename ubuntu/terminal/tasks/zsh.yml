@@ -8,17 +8,14 @@
       - fonts-powerline
     state: present
 
-- name: Back up existing ~/.zshrc
-  shell: if [ -f ~/.zshrc ]; then mv ~/.zshrc ~/.zshrc.bak ; fi
+- name: Setup variables
+  set_fact:
+    link_target: "{{ dotfiles_path }}/zsh/dot-zshrc"
+    backup_path: ~/.zshrc.bak
+    config_path: ~/.zshrc
 
-- name: Ensure dotfiles are up to date
-  include: dotfiles.yml
-
-- name: Link .zshrc
-  file:
-    state: link
-    src: "{{ dotfiles_path }}/zsh/dot-zshrc"
-    dest: ~/.zshrc
+- name: Backup and link vim config
+  include: backup_and_link_config.yml
 
 - name: Install zplug
   shell: test -d ~/.zplug || curl -sL --proto-redir -all,https https://raw.githubusercontent.com/zplug/installer/master/installer.zsh | zsh

@@ -5,17 +5,14 @@
       - tmux
     state: present
 
-- name: Ensure dotfiles are up to date
-  include: dotfiles.yml
+- name: Setup variables
+  set_fact:
+    link_target: "{{ dotfiles_path }}/tmux/dot-tmux.conf"
+    backup_path: ~/.tmux.conf.bak
+    config_path: ~/.tmux.conf
 
-- name: Back up existing ~/.tmux.conf
-  shell: if [ -f ~/.tmux.conf ]; then mv ~/.tmux.conf ~/.tmux.conf.bak ; fi
-
-- name: Link .tmux.conf
-  file:
-    state: link
-    src: "{{ dotfiles_path }}/tmux/dot-tmux.conf"
-    dest: ~/.tmux.conf
+- name: Backup and link vim config
+  include: backup_and_link_config.yml
 
 - name: Install TPM
   git: 

@@ -5,14 +5,14 @@
       - ranger
     state: present
 
-- name: Ensure dotfiles are up to date
-  include: dotfiles.yml
-
-- name: Ensure directories exist
-  include: directories.yml
-
-- name: Back up existing ranger config
-  shell: if [ -d ~/.config/ranger ]; then mv ~/.config/ranger ~/.config/ranger.bak ; fi
+- name: Setup variables
+  set_fact:
+    link_target: "{{ dotfiles_path }}/dot-config/ranger/ranger"
+    backup_path: ~/.config/ranger.bak
+    config_path: ~/.config/ranger
+    
+- name: Backup and link vim config
+  include: backup_and_link_config.yml
 
 - name: Link ranger config
   file:

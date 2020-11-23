@@ -5,26 +5,23 @@
       - git
     state: present
 
-- name: Ensure dotfiles are up to date
-  include: dotfiles.yml
+- name: Setup gitconfig variables
+  set_fact:
+    link_target: "{{ dotfiles_path }}/git/dot-gitconfig"
+    backup_path: ~/.gitconfig.bak
+    config_path: ~/.gitconfig
+    
+- name: Backup and link vim config
+  include: backup_and_link_config.yml
 
-- name: Back up existing ~/.gitconfig
-  shell: if [ -f ~/.gitconfig ]; then mv ~/.gitconfig ~/.gitconfig.bak ; fi
+- name: Setup gitignore variables
+  set_fact:
+    link_target: "{{ dotfiles_path }}/git/dot-gitignore-global"
+    backup_path: ~/.gitignore-global.bak
+    config_path: ~/.gitignore-global
 
-- name: Link .gitconfig
-  file:
-    state: link
-    src: "{{ dotfiles_path }}/git/dot-gitconfig"
-    dest: ~/.gitconfig
-
-- name: Back up existing ~/.gitignore-global
-  shell: if [ -f ~/.gitignore-global ]; then mv ~/.gitignore-global ~/.gitignore-global.bak ; fi
-
-- name: Link .gitignore-global
-  file:
-    state: link
-    src: "{{ dotfiles_path }}/git/dot-gitignore-global"
-    dest: ~/.gitignore-global
+- name: Backup and link vim config
+  include: backup_and_link_config.yml
 
 - name: Setup global gitignore
   shell: git config --global core.excludesfile ~/.gitignore-global
