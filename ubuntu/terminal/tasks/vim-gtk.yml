@@ -5,27 +5,39 @@
       - vim-gtk
     state: present
 
+- name: Setup variables
+  set_fact:
+    vimrc: { 
+      "link_target": "{{ dotfiles_path }}/vim/dot-vimrc", 
+      "backup_path": ~/.vimrc.back,
+      "config_path": ~/.vimrc
+    }
+
 - name: Ensure dotfiles are up to date
   include: dotfiles.yml
 
-- name: Check if ~/.vimrc already exists
+- name: Check if "{{ vimrc.backup_path }}" already exists
   stat: 
-    path: ~/.vimrc.bak
+    path: "{{ vimrc.backup_path }}"
   register: backup_stat
 
-- name: Fail if ~/.vimrc.bak already exists
+- name: Fail if "{{ vimrc.backup_path }}" already exists
   fail:
-    msg: ~/.vimrc.bak already exists, refusing to continue
+    msg: "{{ vimrc.backup_path }} already exists, refusing to continue"
   when: backup_stat.stat.exists
 
-- name: Back up existing ~/.vimrc
-  shell: if [ ! -L ~/.vimrc ] && [ -f ~/.vimrc ]; then mv ~/.vimrc ~/.vimrc.bak; fi
+- name: Back up existing "{{ vimrc.config_path}}"
+  shell: |
+    if [ ! -L "{{ vimrc.config_path}}" ] && [ -f "{{ vimrc.config_path}}" ]
+    then 
+      mv "{{ vimrc.config_path}}" "{{ vimrc.backup_path }}"
+    fi
 
-- name: Setup .vimrc
+- name: Setup "{{ vimrc.config_path}}"
   file:
     state: link
-    src: "{{ dotfiles_path }}/vim/dot-vimrc"
-    dest: ~/.vimrc
+    src: "{{ vimrc.link_target }}"
+    dest: "{{ vimrc.config_path}}"
 
 - name: Install vim-plug
   shell: curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
