@@ -5,4 +5,5 @@
       - stow 
       - mlocate # for locate and updatedb
       - python
+      - curl
     state: present

@@ -13,9 +13,3 @@
     
 - name: Backup and link vim config
   include: backup_and_link_config.yml
-
-- name: Link ranger config
-  file:
-    state: link
-    src: "{{ dotfiles_path }}/dot-config/ranger"
-    dest: ~/.config/ranger
