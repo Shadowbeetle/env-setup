@@ -5,7 +5,7 @@
 3. Add SSH key to GitHub
 4. Install git
 5. Clone this repo
-6. Run setup.sh
+6. Run `[repo]/setup.sh`
 7. Ansible away!
 
 # Usage
