@@ -6,9 +6,9 @@
       private: yes
   roles:
     - system
-    - terminal
+    - development
   tasks:
     - name: All done!
       debug:
         msg:
-          - Terminal env setup successfully!
+          - Development env setup successfully!
