@@ -2,3 +2,8 @@
   include: node.yml
   tags:
     - node
+
+- name: Setup go
+  include: go.yml
+  tags:
+    - go
