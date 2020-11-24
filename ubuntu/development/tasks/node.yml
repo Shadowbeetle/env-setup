@@ -8,6 +8,6 @@
   args:
     creates: "{{ ansible_env.HOME }}/.nvm/nvm.sh"
 
-- name: Done. Restart your terminal and run nvm install node to install the latest node version.
+- name: Done. Restart your terminal and run `nvm install --lts` node to install the latest stable node version.
   debug:
-    msg: Done. Restart your terminal and run nvm install node to install the latest node version.
+    msg: Done. Restart your terminal and run `nvm install --lts` node to install the latest stable node version.
