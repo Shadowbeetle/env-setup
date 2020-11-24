@@ -7,3 +7,8 @@
   include: go.yml
   tags:
     - go
+
+- name: Setup elm
+  include: elm.yml
+  tags:
+    - elm

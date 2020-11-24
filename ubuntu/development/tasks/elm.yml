@@ -1,0 +1,26 @@
+- name: Download elm
+  get_url:
+    url: https://github.com/elm/compiler/releases/download/{{ elm_version }}/binary-for-linux-64-bit.gz
+    dest: ./elm.gz
+
+- name: Unzip go
+  command: gunzip elm.gz
+  args:
+    creates: elm
+  become: yes
+
+- name: Make elm executable
+  file: 
+    path: elm
+    mode: +x
+
+- name: Move elm to /usr/local/bin 
+  command: mv elm /usr/local/bin/elm
+  args:
+    creates: /usr/local/bin/elm
+  become: yes
+
+- name: Remove zip archive
+  file:
+    path: elm.gz
+    state: absent

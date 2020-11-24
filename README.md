@@ -39,5 +39,5 @@ ansible-playbook ubuntu/terminal.yml --skip-tags "vim,git"
 System upgared is tagged with `always`, so if you want to omit it you need to explicitly skip it
 
 ```sh
-ansible-playbook ubuntu/terminal.yml --skip-tags "always" --tags "vim,git"
+ansible-playbook ubuntu/development.yml --skip-tags "always" --tags "elm"
 ```
