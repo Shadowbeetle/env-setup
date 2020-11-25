@@ -27,4 +27,4 @@
 
 # TODO: figure out how to make sure npm is installed and the context is reloaded
 - name: Install necessary packages
-  command: npm install -g elm-oracle elm-format elm-test
+  command: npm install -g elm-oracle elm-format elm-test elm-live
