@@ -8,10 +8,10 @@
   tags:
     - vim
 
-- name: Setup zsh
-  include: zsh.yml
+- name: Setup fish
+  include: fish.yml
   tags:
-    - zsh
+    - fish
 
 - name: Setup git 
   include: git.yml
