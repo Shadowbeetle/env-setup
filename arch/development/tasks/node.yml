@@ -1,0 +1,13 @@
+- name: Install dependencies
+  pacman:
+    name: 
+      - curl
+
+- name: Install nvm
+  shell: curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.37.0/install.sh | bash
+  args:
+    creates: "{{ ansible_env.HOME }}/.nvm/nvm.sh"
+
+- name: Done. Restart your terminal and run `nvm install --lts` node to install the latest stable node version.
+  debug:
+    msg: Done. Restart your terminal and run `nvm install --lts` node to install the latest stable node version.

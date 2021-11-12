@@ -1,0 +1,20 @@
+- name: Install tmux
+  become: yes
+  pacman:
+    name:
+      - tmux
+    state: present
+
+- name: Setup variables
+  set_fact:
+    link_target: "{{ dotfiles_path }}/tmux/dot-tmux.conf"
+    backup_path: ~/.tmux.conf.bak
+    config_path: ~/.tmux.conf
+
+- name: Backup and link vim config
+  include: backup_and_link_config.yml
+
+- name: Install TPM
+  git: 
+    repo: https://github.com/tmux-plugins/tpm 
+    dest: ~/.tmux/plugins/tpm

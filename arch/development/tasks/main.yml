@@ -1,0 +1,14 @@
+- name: Setup node
+  include: node.yml
+  tags:
+    - node
+
+- name: Setup go
+  include: go.yml
+  tags:
+    - go
+
+- name: Setup elm
+  include: elm.yml
+  tags:
+    - elm

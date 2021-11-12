@@ -1,0 +1,29 @@
+- name: Install generic apps
+  include: apps.yml
+  tags:
+    - apps
+
+- name: Setup vim-gtk
+  include: vim-gtk.yml
+  tags:
+    - vim
+
+- name: Setup zsh
+  include: zsh.yml
+  tags:
+    - zsh
+
+- name: Setup git 
+  include: git.yml
+  tags:
+    - git
+
+- name: Setup tmux
+  include: tmux.yml
+  tags:
+    - tmux
+
+- name: Setup ranger
+  include: ranger.yml
+  tags:
+    - ranger

@@ -1,0 +1,28 @@
+- name: Install fish and dependencies
+  become: yes
+  pacman:
+    name:
+      - fish
+      - curl
+      - git
+      - fzf  
+    state: present
+
+- name: Setup variables
+  set_fact:
+    link_target: "{{ dotfiles_path }}/dot-config/fish/config.fish"
+    backup_path: ~/.config/fish/config.fish.bak
+    config_path: ~/.config/fish/config.fish
+
+- name: Backup and link fish config
+  include: backup_and_link_config.yml
+
+- name: Get zsh path
+  command: which fish 
+  register: fish_path
+
+- name: Switch to fish
+  user: 
+    name: "{{ ansible_facts['user_id'] }}"
+    shell: "{{ fish_path.stdout }}"
+  become: yes 

@@ -1,0 +1,4 @@
+- name: System upgrade
+  include: system-upgrade.yml
+  tags:
+    - always

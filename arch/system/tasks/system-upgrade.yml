@@ -1,0 +1,13 @@
+- name: Pacman Update & Upgrade
+  become: yes
+  pacman:
+    update_cache: yes
+    upgrade: yes
+  tags:
+    - always
+
+- name: Ensure dotfiles are up to date
+  include: dotfiles.yml
+
+- name: Ensure directories exist
+  include: directories.yml

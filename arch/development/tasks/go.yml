@@ -1,0 +1,16 @@
+- name: Download go
+  get_url:
+    url: https://golang.org/dl/go{{ go_version }}.linux-amd64.tar.gz
+    dest: ./
+    checksum: sha256:"{{ go_checksum }}"
+
+- name: Untar go to /usr/local
+  unarchive:
+    src: go{{ go_version }}.linux-amd64.tar.gz
+    dest: /usr/local
+  become: yes
+
+- name: Remove tar archive
+  file:
+    path: go{{ go_version }}.linux-amd64.tar.gz
+    state: absent

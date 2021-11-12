@@ -1,0 +1,14 @@
+- hosts: 127.0.0.1
+  connection: local
+  vars_prompt:
+    - name: "ansible_become_pass"
+      prompt: "Sudo password"
+      private: yes
+  roles:
+    - system
+    - development
+  tasks:
+    - name: All done!
+      debug:
+        msg:
+          - Development env setup successfully!

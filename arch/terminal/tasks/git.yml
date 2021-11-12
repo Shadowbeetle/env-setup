@@ -1,0 +1,27 @@
+- name: Install git
+  become: yes
+  pacman:
+    name:
+      - git
+    state: present
+
+- name: Setup gitconfig variables
+  set_fact:
+    link_target: "{{ dotfiles_path }}/git/dot-gitconfig"
+    backup_path: ~/.gitconfig.bak
+    config_path: ~/.gitconfig
+    
+- name: Backup and link vim config
+  include: backup_and_link_config.yml
+
+- name: Setup gitignore variables
+  set_fact:
+    link_target: "{{ dotfiles_path }}/git/dot-gitignore-global"
+    backup_path: ~/.gitignore-global.bak
+    config_path: ~/.gitignore-global
+
+- name: Backup and link vim config
+  include: backup_and_link_config.yml
+
+- name: Setup global gitignore
+  shell: git config --global core.excludesfile ~/.gitignore-global

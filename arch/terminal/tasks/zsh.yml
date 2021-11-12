@@ -1,0 +1,31 @@
+- name: Install zsh and dependencies
+  become: yes
+  pacman:
+    name:
+      - zsh
+      - curl
+      - git
+      - powerline-fonts
+    state: present
+
+- name: Setup variables
+  set_fact:
+    link_target: "{{ dotfiles_path }}/zsh/dot-zshrc"
+    backup_path: ~/.zshrc.bak
+    config_path: ~/.zshrc
+
+- name: Backup and link vim config
+  include: backup_and_link_config.yml
+
+- name: Install zplug
+  shell: test -d ~/.zinit || sh -c "$(curl -fsSL https://raw.githubusercontent.com/zdharma-continuum/zinit/master/doc/install.sh)"
+
+- name: Get zsh path
+  command: which zsh 
+  register: zsh_path
+
+- name: Switch to zsh
+  user: 
+    name: "{{ ansible_facts['user_id'] }}"
+    shell: "{{ zsh_path.stdout }}"
+  become: yes 

@@ -1,0 +1,15 @@
+- name: Install ranger
+  become: yes
+  pacman:
+    name:
+      - ranger
+    state: present
+
+- name: Setup variables
+  set_fact:
+    link_target: "{{ dotfiles_path }}/dot-config/ranger/ranger"
+    backup_path: ~/.config/ranger.bak
+    config_path: ~/.config/ranger
+    
+- name: Backup and link vim config
+  include: backup_and_link_config.yml
