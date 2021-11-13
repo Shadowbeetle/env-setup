@@ -6,4 +6,6 @@
     name:
       - stow 
       - topgrade
+      - htop
+      - xclip
     state: present
