@@ -1,0 +1,46 @@
+- name: Install Docker
+  become: true
+  pacman:
+    name:
+      - docker 
+    state: present
+
+- name: Create group named docker
+  group:
+    name: docker
+    state: present
+
+- name: Add user to "docker" group
+  become: true
+  user:
+    name: "{{ ansible_env.USER }}"
+    groups: "docker"
+    append: true
+
+- name: Enable Docker Socket
+  become: true
+  systemd:
+    name: docker.socket
+    enabled: true
+    state: started
+
+- name: Install Docker Compose
+  become: true
+  get_url:
+    url: "https://github.com/docker/compose/releases/download/{{ docker_compose_version }}/docker-compose-Linux-x86_64"
+    dest: "/usr/local/bin/docker-compose"
+    force: True
+    owner: "root"
+    group: "root"
+    mode: "0755"
+
+- name: Prompt to restart
+  pause:
+    prompt: "The computer needs to be restarted for some changes to take effect. Do you want to restart now [y/N]?"
+  register: restart_prompt
+
+- name: Restart
+  when: restart_prompt.user_input == "y"
+  become: true
+  command: reboot
+  
