@@ -1,0 +1,9 @@
+- name: Install apps
+  become: no
+  community.general.pacman:
+    executable: yay
+    extra_args: "--builddir {{ansible_user_dir}}/.cache/yay"
+    name:
+      - handlr-bin
+      - xdg-utils-handlr
+    state: present
