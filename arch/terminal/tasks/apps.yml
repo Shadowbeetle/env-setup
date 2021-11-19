@@ -8,4 +8,5 @@
       - topgrade
       - htop
       - xclip
+      - ripgrep
     state: present
