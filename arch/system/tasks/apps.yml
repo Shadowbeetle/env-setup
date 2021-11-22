@@ -6,4 +6,5 @@
     name:
       - handlr-bin
       - xdg-utils-handlr
+      - gnome-keyring
     state: present
