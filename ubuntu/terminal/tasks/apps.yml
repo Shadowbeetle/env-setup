@@ -4,6 +4,6 @@
     name:
       - stow 
       - mlocate # for locate and updatedb
-      - python
+      - python3
       - curl
     state: present
