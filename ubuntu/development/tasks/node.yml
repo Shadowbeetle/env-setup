@@ -2,6 +2,7 @@
   apt:
     name: 
       - curl
+      - build-essential
 
 - name: Install nvm
   shell: curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.37.0/install.sh | bash

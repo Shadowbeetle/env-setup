@@ -8,6 +8,11 @@
   tags:
     - vim
 
+- name: Setup neovim
+  include: nvim.yml
+  tags:
+    - nvim
+
 - name: Setup zsh
   include: zsh.yml
   tags:
