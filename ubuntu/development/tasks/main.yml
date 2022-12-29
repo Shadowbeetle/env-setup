@@ -12,3 +12,9 @@
   include: elm.yml
   tags:
     - elm
+
+- name: Setup Docker
+  include: docker.yml
+  become: true
+  tags:
+    - docker
