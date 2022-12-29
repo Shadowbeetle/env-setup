@@ -1,0 +1,21 @@
+- name: Download cargo
+  get_url: 
+    url: https://sh.rustup.rs
+    dest: "/home/{{ ansible_env.USER }}/Downloads/sh.rustup.rs"
+    mode: '777'
+
+- name: Install cargo
+  become: true
+  shell: "/home/{{ ansible_env.USER }}/Downloads/sh.rustup.rs -y"
+  args:
+    creates: 
+      "/home/{{ ansible_env.USER }}/.cargo"
+
+- name: Remove installer
+  file:
+    path: "/home/{{ ansible_env.USER }}/Downloads/sh.rustup.rs" 
+    state: absent
+
+- name: Install LSD
+  community.general.cargo:
+    name: lsd

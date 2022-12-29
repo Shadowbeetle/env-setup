@@ -1,4 +1,4 @@
-- name: TODO: Use the AppImage to install neovim!!!
+- name: "TODO: Use the AppImage to install neovim!!!"
   become: yes
   fail: 
     msg: Use the AppImage to install neovim!!!

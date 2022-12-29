@@ -37,3 +37,8 @@
   include: utils.yml
   tags:
     - utils
+
+- name: Setup lsd
+  include: lsd.yml
+  tags:
+    - lsd
