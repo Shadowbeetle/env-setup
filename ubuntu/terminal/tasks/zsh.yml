@@ -14,7 +14,7 @@
     backup_path: ~/.zshrc.bak
     config_path: ~/.zshrc
 
-- name: Backup and link vim config
+- name: Backup and link zsh config
   include: backup_and_link_config.yml
 
 - name: Install zplug

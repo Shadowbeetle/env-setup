@@ -1,7 +1,17 @@
-- name: "TODO: Use the AppImage to install neovim!!!"
+- name: Add neovim PPA
   become: yes
-  fail: 
-    msg: Use the AppImage to install neovim!!!
+  apt_repository:
+    repo: 'ppa:neovim-ppa/stable'
+    state: present
+
+- name: Install neovim
+  become: yes
+  apt:
+    name:
+      - software-properties-common
+      - neovim
+    state: present
+    update_cache: yes
 
 - name: Setup variables
   set_fact:
@@ -12,8 +22,9 @@
 - name: Backup and link vim config
   include: backup_and_link_config.yml
 
-- name: Install vim-plug
-  shell: sh -c 'curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim' 
-  args:
-    creates: ~/.local/share/nvim/site/autoload/plug.vim
+- name: Install packer
+  git: 
+    repo: https://github.com/wbthomason/packer.nvim
+    dest:  ~/.local/share/nvim/site/pack/packer/start/packer.nvim
+    depth: 1
 

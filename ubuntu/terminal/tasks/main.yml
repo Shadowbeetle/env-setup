@@ -3,14 +3,10 @@
   tags:
     - apps
 
-- name: Setup vim-gtk
-  include: vim-gtk.yml
-  tags:
-    - vim
-
-- name: Setup neovim
+- name: Setup nvim
   include: nvim.yml
   tags:
+    - vim
     - nvim
 
 - name: Setup zsh
