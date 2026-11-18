@@ -3,6 +3,7 @@
   apt:
     name:
       - tmux
+      - xclip # clipboard for tmux-yank
     state: present
 
 - name: Setup variables
@@ -11,10 +12,19 @@
     backup_path: ~/.tmux.conf.bak
     config_path: ~/.tmux.conf
 
-- name: Backup and link vim config
+- name: Backup and link tmux config
   include: backup_and_link_config.yml
 
 - name: Install TPM
-  git: 
-    repo: https://github.com/tmux-plugins/tpm 
+  git:
+    repo: https://github.com/tmux-plugins/tpm
     dest: ~/.tmux/plugins/tpm
+
+- name: Setup variables for tmux scripts
+  set_fact:
+    link_target: "{{ dotfiles_path }}/tmux/dot-tmux/scripts"
+    backup_path: ~/.tmux/scripts.bak
+    config_path: ~/.tmux/scripts
+
+- name: Backup and link tmux scripts
+  include: backup_and_link_config.yml
