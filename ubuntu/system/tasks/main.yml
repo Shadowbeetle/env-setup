@@ -1,4 +1,4 @@
 - name: System upgrade
-  include: system-upgrade.yml
+  import_tasks: system-upgrade.yml
   tags:
     - always

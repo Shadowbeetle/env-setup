@@ -20,7 +20,7 @@
     config_path: ~/.config/nvim
 
 - name: Backup and link vim config
-  include: backup_and_link_config.yml
+  import_tasks: backup_and_link_config.yml
 
 - name: Install packer
   git: 

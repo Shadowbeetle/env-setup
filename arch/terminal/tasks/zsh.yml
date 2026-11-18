@@ -15,7 +15,7 @@
     config_path: ~/.zshrc
 
 - name: Backup and link vim config
-  include: backup_and_link_config.yml
+  import_tasks: backup_and_link_config.yml
 
 - name: Install zplug
   shell: test -d ~/.zinit || sh -c "$(curl -fsSL https://raw.githubusercontent.com/zdharma-continuum/zinit/master/doc/install.sh)"

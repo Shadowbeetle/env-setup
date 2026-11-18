@@ -12,7 +12,7 @@
     config_path: ~/.tmux.conf
 
 - name: Backup and link tmux config
-  include: backup_and_link_config.yml
+  import_tasks: backup_and_link_config.yml
 
 - name: Install TPM
   git:
@@ -26,4 +26,4 @@
     config_path: ~/.tmux/scripts
 
 - name: Backup and link tmux scripts
-  include: backup_and_link_config.yml
+  import_tasks: backup_and_link_config.yml

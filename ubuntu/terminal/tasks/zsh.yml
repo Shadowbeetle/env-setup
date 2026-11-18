@@ -15,7 +15,7 @@
     config_path: ~/.zshrc
 
 - name: Backup and link zsh config
-  include: backup_and_link_config.yml
+  import_tasks: backup_and_link_config.yml
 
 - name: Install zplug
   shell: test -d ~/.zplug || curl -sL --proto-redir -all,https https://raw.githubusercontent.com/zplug/installer/master/installer.zsh | zsh

@@ -1,40 +1,40 @@
 - name: Install generic apps
-  include: apps.yml
+  import_tasks: apps.yml
   tags:
     - apps
 
 - name: Setup nvim
-  include: nvim.yml
+  import_tasks: nvim.yml
   tags:
     - vim
     - nvim
 
 - name: Setup zsh
-  include: zsh.yml
+  import_tasks: zsh.yml
   tags:
     - zsh
 
 - name: Setup git 
-  include: git.yml
+  import_tasks: git.yml
   tags:
     - git
 
 - name: Setup tmux
-  include: tmux.yml
+  import_tasks: tmux.yml
   tags:
     - tmux
 
 - name: Setup ranger
-  include: ranger.yml
+  import_tasks: ranger.yml
   tags:
     - ranger
 
 - name: Setup utilities
-  include: utils.yml
+  import_tasks: utils.yml
   tags:
     - utils
 
 - name: Setup lsd
-  include: lsd.yml
+  import_tasks: lsd.yml
   tags:
     - lsd

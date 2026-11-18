@@ -7,7 +7,7 @@
     - always
 
 - name: Ensure dotfiles are up to date
-  include: dotfiles.yml
+  import_tasks: dotfiles.yml
 
 - name: Ensure directories exist
-  include: directories.yml
+  import_tasks: directories.yml
